@@ -1,0 +1,4 @@
+com\example\jenkinsdemoapp\JenkinsdemoappApplication.class
+com\example\jenkinsdemoapp\ServletInitializer.class
+com\example\jenkinsdemoapp\config\SwaggerConfig.class
+com\example\jenkinsdemoapp\controllers\TestController.class
