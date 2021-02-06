@@ -11,7 +11,7 @@ public class TestController {
 
 	@GetMapping("/")
 	public ResponseEntity<String> welcome() {
-		return new ResponseEntity<String>("welcome to - STC project", HttpStatus.OK);
+		return new ResponseEntity<String>("welcome to - STC Demo project", HttpStatus.OK);
 	}
 	
 	@GetMapping("/home/{name}")
