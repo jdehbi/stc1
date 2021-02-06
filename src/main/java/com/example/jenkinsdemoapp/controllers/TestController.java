@@ -11,7 +11,7 @@ public class TestController {
 
 	@GetMapping("/")
 	public ResponseEntity<String> welcome() {
-		return new ResponseEntity<String>("welcome to - STC Demo project", HttpStatus.OK);
+		return new ResponseEntity<String>("welcome to - STC Demo project for CICD Pipeline ", HttpStatus.OK);
 	}
 	
 	@GetMapping("/home/{name}")
@@ -21,6 +21,6 @@ public class TestController {
 	
 	@GetMapping("/contact")
 	public ResponseEntity<String> getContactInfo(){
-		return new ResponseEntity<String>("contact us at jdehbi.consult@gmail.com", HttpStatus.OK);
+		return new ResponseEntity<String>("contact us at jdehbi.c@stcs.com.sa", HttpStatus.OK);
 	}
 }
