@@ -15,7 +15,7 @@ import com.example.jenkinsdemoapp.models.Record;
 import com.example.jenkinsdemoapp.repo.RecordRepo;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin
 public class TestController {
 	
 	@Autowired
