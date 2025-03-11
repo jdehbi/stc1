@@ -11,7 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>jenkinsdemoapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>jenkinsdemoapp</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -53,6 +53,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -61,6 +62,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+            			<groupId>org.sonarsource.scanner.maven</groupId>
+            			<artifactId>sonar-maven-plugin</artifactId>
+            			<version>3.9.1.2184</version> <!-- Latest stable version -->
+        		</plugin>
 		</plugins>
 	</build>
 
