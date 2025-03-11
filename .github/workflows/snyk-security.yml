@@ -52,7 +52,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '8'  # Change this to match your project
-          
+
+      - name: Force JAVA_HOME for Java 8
+        run: echo "JAVA_HOME=${{ env.JAVA_HOME }}" >> $GITHUB_ENV && echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
+        
       - name: Set Maven Wrapper Permissions
         run: chmod +x ./mvnw
 
