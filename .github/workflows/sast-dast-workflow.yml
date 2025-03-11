@@ -1,4 +1,4 @@
-name: SonarCloud Code Analysis
+name: SAST / DAST Workflow 
 
 on:
   push:
@@ -63,7 +63,8 @@ jobs:
 
       - name : Run ZAP scan
         uses: zaproxy/action-full-scan@v0.4.0
-        with: 
+        with:
+          docker_name: "owasp/zap2docker-weekly"
           target: 'http://localhost:8080'
           cmd_options: '-a'
 
