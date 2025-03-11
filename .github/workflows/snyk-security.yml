@@ -52,6 +52,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '8'  # Change this to match your project
+          
+      - name: Set Maven Wrapper Permissions
+        run: chmod +x ./mvnw
 
       - name: Install Maven Dependencies
         run: mvn dependency:resolve
