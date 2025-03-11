@@ -65,23 +65,24 @@ jobs:
         uses: zaproxy/action-full-scan@v0.4.0
         with:
           docker_name: "zaproxy/zap-weekly"
-          target: 'http://localhost:8080'
+          #target: 'http://localhost:8080'
+          target: 'https://pragmatic.ma/'
           cmd_options: '-a'
 
 # ZAP Report 
-      - name: report generation
-        run: |
-          docker run --rm -v $GITHUB_WORKSPACE:/zap/reports zaproxy/zap-weekly zap.sh \
-          -cmd report \
-          -o /zap/reports/zap_report.pdf \
-          -f pdf
+      # - name: report generation
+      #   run: |
+      #     docker run --rm -v $GITHUB_WORKSPACE:/zap/reports zaproxy/zap-weekly zap.sh \
+      #     -cmd report \
+      #     -o /zap/reports/zap_report.pdf \
+      #     -f pdf
           
-      - name: Upload ZAP Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: ZAP Reports
-          path: |
-            zap_report.pdf
+      # - name: Upload ZAP Report
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: ZAP Reports
+      #     path: |
+      #       zap_report.pdf
             
 # Stop Application   
       - name: Stop Application
