@@ -39,8 +39,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: c29d18edd7958bf4f9963ddcc29ab48e1be8e2ea
+      - name: Force Maven to Rebuild Dependencies
+        run: mvn clean install -U
+        
+      - name: Run SonarCloud Scan
         run: |
-          mvn clean verify sonar:sonar \
+          mvn sonar:sonar \
             -Dsonar.projectKey=jd212org_stcproject \
             -Dsonar.organization=jd212org \
             -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.maven.plugin.version=3.9.1.2184
