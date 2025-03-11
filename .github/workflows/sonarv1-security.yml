@@ -4,10 +4,10 @@ name: SonarCloud Code Analysis
 on:
   push:
     branches:
-      - CopySTC
+      - main
   pull_request:
     branches:
-      - CopySTC
+      - main
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
