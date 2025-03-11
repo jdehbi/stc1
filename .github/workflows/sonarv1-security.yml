@@ -1,0 +1,55 @@
+
+name: SonarCloud Code Analysis
+
+on:
+  push:
+    branches:
+      - CopySTC
+  pull_request:
+    branches:
+      - CopySTC
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Ensures full history for SonarCloud analysis
+
+      # ✅ Use Java 8 for Compilation
+      - name: Set up JDK 8 (For Building)
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven
+
+      - name: Build with Maven (Using Java 8)
+        run: mvn clean verify
+
+      # ✅ Switch to Java 17 for SonarCloud
+      - name: Set up JDK 17 (For SonarCloud)
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          
+      - name: Force Maven to Rebuild Dependencies
+        run: mvn clean install -U
+        
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: c29d18edd7958bf4f9963ddcc29ab48e1be8e2ea
+        run: |
+          mvn sonar:sonar \
+            -Dsonar.projectKey=jd212org_stcproject \
+            -Dsonar.organization=jd212org \
+            -Dsonar.host.url=https://sonarcloud.io
