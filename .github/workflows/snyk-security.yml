@@ -43,12 +43,24 @@ jobs:
 
         # For Snyk Open Source you must first set up the development environment for your application's dependencies
         # For example for Node
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      # - uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 20
 
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '8'  # Change this to match your project
+
+      - name: Install Maven Dependencies
+        run: mvn dependency:resolve
+
+      - name: Generate Dependency Tree (Debugging)
+        run: mvn dependency:tree -DoutputType=dot --batch-mode --non-recursive --file="pom.xml"
+        
       - name: run snyk
-        uses: snyk/actions/node@master
+        uses: snyk/actions/maven@master
        
         env:
           # This is where you will need to introduce the Snyk API token created with your Snyk account
