@@ -68,6 +68,22 @@ jobs:
           target: 'http://localhost:8080'
           cmd_options: '-a'
 
+# ZAP Report 
+      - name: report generation
+        run: |
+          docker run --rm -v $GITHUB_WORKSPACE:/zap/reports owasp/zap2docker-weekly zap.sh \
+          -cmd report \
+          -o /zap/reports/zap_report.pdf \
+          -f pdf
+          
+      - name: Upload ZAP Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: ZAP Reports
+          path: |
+            zap_report.pdf
+            
+# Stop Application   
       - name: Stop Application
         if: always()
         run: pkill -f 'java -jar'
