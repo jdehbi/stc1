@@ -33,15 +33,14 @@ jobs:
         with:
           path: ~/.m2
           key: ${{ runner.os }}-maven
-
+          
+      - name: Force Maven to Rebuild Dependencies
+        run: mvn clean install -U
+        
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: c29d18edd7958bf4f9963ddcc29ab48e1be8e2ea
-      - name: Force Maven to Rebuild Dependencies
-        run: mvn clean install -U
-        
-      - name: Run SonarCloud Scan
         run: |
           mvn sonar:sonar \
             -Dsonar.projectKey=jd212org_stcproject \
